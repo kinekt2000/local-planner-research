@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<launch>
+    <!-- Run gazebo empty world -->
+    <include file="$(find gazebo_ros)/launch/empty_world.launch"/>
+
+    <!-- Spawn robot -->
+    <include file="$(find robot_description)/launch/spawn.launch"/>
+
+    <!-- attach controller -->
+    <include file="$(find robot_control)/launch/diff_drive_robot_control.launch"/>
+</launch>

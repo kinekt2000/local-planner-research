@@ -1,0 +1,34 @@
+base_global_planner: "global_planner/GlobalPlanner"
+base_local_planner: "dwa_local_planner/DWAPlannerROS"
+
+# recovery_behaviors: #[]
+#   - name: conservative_reset
+#     type: clear_costmap_recovery/ClearCostmapRecovery
+#   - name: agressive_reset
+#     type: clear_costmap_recovery/ClearCostmapRecovery
+  
+controller_frequency: 20.
+planner_frequency: 0.  # 0. is only plan on a new goal or when local planner fails
+planner_patience: 5.
+controller_patience: 15.
+recovery_behavior_enables: true
+conservative_reset_dist: 3.0
+shutdown_costmaps: false
+oscillation_timeout: 10.  # 0. is infinite
+oscillation_distance: 0.2
+map_planning_retries: -1.  # -1 is infinite
+
+GlobalPlanner:
+  allow_unknown: true
+  default_tolerance: 0.
+  visualize_potential: true
+  use_dijkstra: true  # although A* is faster, implementation pecularities here make it undesirable
+  use_quadratic: true
+  use_grid_path: false
+  old_navfn_behavior: false
+  lethal_cost: 253 #253 # how far from obstacle
+  neutral_cost: 66 #40
+  cost_factor:  0.55 #3
+  publish_potential: True
+  orientation_mode: 0.
+  orientation_window_size: 1

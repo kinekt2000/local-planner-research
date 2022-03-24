@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<launch>
+    <rosparam file="$(find robot_control)/config/diff_drive_robot_control.yaml" command="load"/>
+
+    <node name="controller_spawner"
+        pkg="controller_manager"
+        type="spawner"
+        respawn="false"
+        output="screen"
+        ns="robot"
+        args="joint_state_controller mobile_base_controller" />
+
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" ns="robot" respawn="false" output="screen">        
+        <remap from="/joint_states" to="/robot/joint_states"/>
+    </node>
+</launch>
