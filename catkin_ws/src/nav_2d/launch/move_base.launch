@@ -1,22 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <launch>
     <arg name="local_planner" default="dwa"/>
-    <arg name="cmd_vel_topic" default="/robot/mobile_base_controller/cmd_vel"/>
-    <arg name="odom_topic" default="/robot/mobile_base_controller/odom"/>
+    <arg name="cmd_vel_topic" default="robot/cmd_vel"/>
+    <arg name="odom_topic" default="odom"/>
 
     <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
 
         <!-- move base parameters -->
-        <rosparam file="$(find nav_2d)/config/$(arg local_planner)_local_planner_params.yaml" command="load"/>
         <rosparam file="$(find nav_2d)/config/move_base_params.yaml" command="load"/>
+        <rosparam file="$(find nav_2d)/config/global_planner_params.yaml" command="load"/>
+        <rosparam file="$(find nav_2d)/config/$(arg local_planner)_local_planner_params.yaml" command="load"/>
 
+        
         <!-- global costmap -->
-        <rosparam file="$(find nav_2d)/config/coastmap_common_params.yaml" command="load" ns="global_coastmap"/>
-        <rosparam file="$(find nav_2d)/config/coastmap_global_params.yaml" command="load"/>
+        <rosparam file="$(find nav_2d)/config/costmap_common_params.yaml" command="load" ns="global_costmap"/>
+        <rosparam file="$(find nav_2d)/config/costmap_global_params.yaml" command="load"/>
         
         <!-- local costmap -->
-        <rosparam file="$(find nav_2d)/config/coastmap_common_params.yaml" command="load" ns="local_coastmap"/>
-        <rosparam file="$(find nav_2d)/config/coastmap_local_params.yaml" command="load"/>
+        <rosparam file="$(find nav_2d)/config/costmap_common_params.yaml" command="load" ns="local_costmap"/>
+        <rosparam file="$(find nav_2d)/config/costmap_local_params.yaml" command="load"/>
 
         <!-- remap -->
         <remap from="cmd_vel" to="$(arg cmd_vel_topic)"/>

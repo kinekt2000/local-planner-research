@@ -1,0 +1,57 @@
+<?xml version="1.0" ?>
+
+<robot name="robot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <!-- meta properties -->
+  <xacro:property name="package_name" value="robot_description"/>
+  <xacro:property name="robot_name" value="simple_robot"/>
+  
+  <!-- robot description properties-->
+  <xacro:property name="base_length" value="0.5"/>
+  <xacro:property name="base_width" value="0.3"/>
+  <xacro:property name="base_height" value="0.07"/>
+
+  <xacro:property name="laser_sensor_size" value="0.05"/>
+
+  <xacro:property name="wheel_diam" value="0.2"/>
+  <xacro:property name="wheel_width" value="0.04"/>
+
+  <xacro:property name="collision_inflation" value="1.1"/>
+
+  <!-- includes -->
+  <xacro:include filename="$(find ${package_name})/urdf/${robot_name}.gazebo"/>
+  <xacro:include filename="$(find ${package_name})/urdf/include/materials.xacro"/>
+  <xacro:include filename="$(find ${package_name})/urdf/include/parts.xacro"/>
+
+  <!-- calculated properties -->
+  <xacro:property name="wheel_x_pos" value="${base_length/4}"/>
+  <xacro:property name="wheel_y_pos" value="${base_width/2+wheel_width/2}"/>
+  <xacro:property name="wheel_z_pos" value="0"/>
+
+  <!-- footprint link -->
+  <link name="link_footprint"/>
+  <joint name="joint_footprint" type="fixed">
+    <origin xyz="0 0 ${wheel_diam/2}"/>
+    <parent link="link_footprint"/>
+    <child link="link_chassis"/>
+  </joint>
+
+  <!-- description -->
+  <xacro:base link_name="link_chassis" m="5"
+    length="${base_length}" width="${base_width}" height="${base_height}"
+    collision_inflation="${collision_inflation}" />
+
+  <xacro:caster prefix="rear" base_link="link_chassis"
+    m="0.01" r="${wheel_diam/4}"
+    x_pos="${-base_length/4}" y_pos="0" z_pos="${-wheel_diam/4}" />
+
+  <xacro:wheel side="right" base_link="link_chassis"
+    m="0.2" r="${wheel_diam/2}" l="${wheel_width}"
+    x_pos="${wheel_x_pos}" y_pos="${-wheel_y_pos}" z_pos="${wheel_z_pos}" />
+
+  <xacro:wheel side="left" base_link="link_chassis"
+    m="0.2" r="${wheel_diam/2}" l="${wheel_width}"
+    x_pos="${wheel_x_pos}" y_pos="${wheel_y_pos}" z_pos="${wheel_z_pos}" />
+    
+  <xacro:laser name="laser" base_link="link_chassis" m="1e-5" size="${laser_sensor_size}"
+    x_pos="${base_length/2 + laser_sensor_size/2}" y_pos="0" z_pos="0"/>
+</robot>

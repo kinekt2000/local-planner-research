@@ -1,0 +1,186 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:include filename="$(find ${package_name})/urdf/include/inertia.xacro"/>
+
+  <!-- params:
+  - side [string]: left or right. Produces names: `link_{side}_wheel`, `joint_{side}_wheel`
+  - base_link [string]: frame to which the wheel is attached
+  - m [float]: link mass;
+  - r [float]: cylinder radius (radius of wheel);
+  - l [float]: cylinder length (width of wheel);
+  - x_pos [float]: moves wheel forward or backward from the origin of the base
+  - y_pos [float]: moves wheel left or right from the origin of the base
+  - z_pos [float]: moves wheel up or down from the origin of the base
+  -->
+  <xacro:macro name="wheel" params="side base_link m r l x_pos y_pos z_pos">
+    <link name="link_${side}_wheel">
+      
+      <visual>
+        <origin xyz="0 0 0" rpy="${pi/2} 0 0" />
+        <geometry>
+          <cylinder radius="${r}" length="${l}" />
+        </geometry>
+        <material name="blue" />
+      </visual>
+      
+      <collision>
+        <origin xyz="0 0 0" rpy="${pi/2} 0 0" />
+        <geometry>
+          <cylinder radius="${r}" length="${l}" />
+        </geometry>
+      </collision>
+
+      <xacro:cylinder_inertia m="${m}" r="${r}" l="${l}" o_xyz="0.0 0.0 0.0" o_rpy="${pi/2} 0.0 0.0" />
+    </link>
+
+    <joint name="joint_${side}_wheel" type="continuous">
+      <axis xyz="0 1 0" rpy="0 0 0" />
+      <parent link="${base_link}" />
+      <child link="link_${side}_wheel" />
+      <origin xyz="${x_pos} ${y_pos} ${z_pos}" rpy="0 0 0" />
+      <limit effort="10000" velocity="1000"/>
+      <joint_properties damping="1.0" friction="1.0"/>
+    </joint>
+
+
+    <!-- This block provides the simulator (Gazebo) with information on a few additional
+      physical properties. See http://gazebosim.org/tutorials/?tut=ros_urdf for more-->
+    <gazebo reference="link_${side}_wheel">
+      <mu1 value="200.0" />
+      <mu2 value="200.0" />
+      <kp value="10000000.0" />
+      <kd value="1.0" />
+      <!-- <minDepth>0.08</minDepth> -->
+      <material>Gazebo/Blue</material>
+    </gazebo>
+  </xacro:macro>
+
+
+  <!-- params:
+  - prefix [string]: Produces names: `link_{prefix}_caster`, `joint_{prefix}_caster`
+  - base_link [string]: frame to which the coster is attached
+  - m [float]: link mass;
+  - r [float]: radius of caster
+  - x_pos [float]: moves caster forward or backward from the origin of the base
+  - y_pos [float]: moves caster left or right from the origin of the base
+  - z_pos [float]: moves caster up or down from the origin of the base
+  -->
+  <xacro:macro name="caster" params="prefix base_link m r x_pos y_pos z_pos">
+    <link name="link_${prefix}_caster">
+      <collision name="link_${prefix}_caster_collision">
+        <origin rpy=" 0 0 0" xyz="0 0 0"/>
+        <geometry>
+          <sphere radius="${r}"/>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>0</mu>
+              <mu2>0</mu2>
+              <slip1>1.0</slip1>
+              <slip2>1.0</slip2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+
+      <visual name="link_${prefix}_caster_visual">
+        <origin rpy=" 0 0 0" xyz="0 0 0"/>
+        <geometry>
+          <sphere radius="${r}"/>
+        </geometry>
+        <material name="blue"/>
+      </visual>
+
+      <xacro:sphere_inertia m="${m}" r="${r}"/>
+    </link>
+  
+    <joint name="joint_${prefix}_caster" type="fixed">
+      <origin rpy="0 0 0" xyz="${x_pos} ${y_pos} ${z_pos}"/>
+      <parent link="${base_link}"/>
+      <child link="link_${prefix}_caster"/>
+    </joint>
+  </xacro:macro>
+
+
+  <!-- Creates box-shaped base link with origin in center
+  params:
+  - link_name [string]: sets base link name
+  - m [float]: mass of base-link box
+  - length [float]: sets length of box (x-axis)
+  - width  [float]: sets width of box  (y-axis)
+  - height [float]: sets height of box (z-axis)
+  - collision_inflation: physical size multiplier (usually more than 1)
+  -->  
+  <xacro:macro name="base" params="link_name m length width height collision_inflation">
+    <link name="${link_name}">
+      
+      <collision name="${link_name}_collision">
+          <geometry>
+          <box size="${length*collision_inflation} ${width*collision_inflation} ${height*collision_inflation}"/>
+        </geometry>
+      </collision>
+      
+      <visual name="${link_name}_visual">
+        <geometry>
+          <box size="${length} ${width} ${height}"/>
+        </geometry>
+        <material name="orange"/>
+      </visual>
+
+      <xacro:box_inertia m="${m}" x="${length}" y="${width}" z="${height}"
+        o_xyz="0 0 0" o_rpy="0 0 0"/>
+    </link>
+  </xacro:macro>
+
+
+  <!-- Creates cube-shaped laser
+  params:
+  - name [string]: produces names: `link_{name}`, `joint_{name}`
+  - base_link [string]: frame to which the laser is attached
+  - m [float]: mass of base-link box
+  - size [float]: size of circumscribing cube
+  - x_pos [float]: moves laser forward or backward from the origin of the base
+  - y_pos [float]: moves laser left or right from the origin of the base
+  - z_pos [float]: moves laser up or down from the origin of the base
+  - r_rot [float]: rotates laser around x-axis
+  - p_rot [float]: rotates laser arount y-axis
+  - y_rot [float]: rotates laser around z-axis
+  -->  
+  <xacro:macro name="laser" params="name base_link m size x_pos y_pos z_pos r_rot:=0.0 p_rot:=0.0 y_rot:=0.0">
+    <link name="link_${name}">
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <box size="${size} ${size} ${size}"/>
+        </geometry>
+      </collision>
+  
+      <visual>
+        <origin xyz="${-size/10} 0 0" rpy="0 0 0"/>
+        <geometry>
+          <box size="${size*0.8} ${size} ${size}"/>
+        </geometry>
+        <material name="green"/>
+      </visual>
+  
+      <visual>
+        <origin xyz="${size*0.25} 0 0" rpy="0 0 0"/>
+        <geometry>
+          <box size="${size*0.5} ${size*0.5} ${size*0.5}"/>
+        </geometry>
+        <material name="green"/>
+      </visual>
+  
+      <xacro:box_inertia m="${m}" x="${size}" y="${size}" z="${size}"/>
+    </link>
+
+    <joint name="joint_${name}" type="fixed">
+      <axis xyz="0 1 0" />
+      <origin xyz="${x_pos} ${y_pos} ${z_pos}" rpy="${r_rot} ${p_rot} ${y_rot}"/>
+      <parent link="${base_link}"/>
+      <child link="link_${name}"/>
+    </joint>
+  </xacro:macro>
+</robot>
