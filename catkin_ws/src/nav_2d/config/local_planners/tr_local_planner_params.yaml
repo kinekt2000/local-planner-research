@@ -1,0 +1,52 @@
+base_local_planner: "base_local_planner/TrajectoryPlannerROS"
+
+TrajectoryPlannerROS:
+# Robot Configuration Parameters
+  acc_lim_x: 1.0
+  acc_lim_y: 0.0
+  acc_lim_theta: 2.5
+
+  max_vel_x: 0.1
+  min_vel_x: 0.0
+
+  max_vel_theta: 1.0
+  min_vel_theta: -1.0
+  min_in_place_vel_theta: 0.5
+
+  escape_vel: -0.1
+  holonomic_robot: false
+
+
+# Goal Tolerance Parametes
+  xy_goal_tolerance: 0.15
+  yaw_goal_tolerance: 0.17
+  latch_xy_goal_tolerance: true
+
+# Forward Simulation Parameters
+  sim_time: 2.0
+  sim_granularity: 0.025
+  angular_sim_granularity: 0.025
+  vx_samples: 15
+  vtheta_samples: 60
+  controller_frequency: 10.0
+
+# Trajectory Scoring Parameters
+  meter_scoring: false
+  pdist_scale: 0.6
+  gdist_scale: 0.8
+  occdist_scale: 0.1
+  heading_lookahead: 1.0
+  heading_scoring: true
+  heading_scoring_timestep: 0.8
+  dwa: false
+  global_frame_id: odom
+
+# Oscillation Prevention Parameters
+  oscillation_reset_dist: 0.3
+
+# Global Plan
+  prune_plan: true
+
+# Debugging
+  publish_traj_pc : true
+  publish_cost_grid_pc: true
