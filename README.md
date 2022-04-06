@@ -47,8 +47,16 @@ local_planner_research/simulation_ws $ roslaunch robot_description spawn.launch
 local_planner_research/simulation_ws $ roslaunch gazebo_ros empty_world.launch
 ```
 
-### Keboard movement
+### Keyboard movement
 ```console
 sudo apt-get install ros-noetic-teleop-twist-keyboard
 local_planner_research/simulation_ws $ rosrun teleop_twist_keyboard teleop_twist_keyboard.py
 ```
+
+### Go to the point
+```console
+local_planner_research/catkin_ws $ catkin_make
+local_planner_research/catkin_ws $ source ./devel/setup.bash
+local_planner_research/catkin_ws $ rosrun straight_spotter straight_spotter.py
+```
+Be carefully, algorithm is absolutely stupid.
