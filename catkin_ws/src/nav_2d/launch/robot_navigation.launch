@@ -1,0 +1,25 @@
+<launch>
+  <arg name="map" default="map_empty.yaml" />
+  <arg name="open_rviz" default="true" />
+  
+  <arg name="local_planner" default="dwa" />
+  <arg name="odom_provider" default="FIXED_ODOM"/>
+
+  <node name="map_server" pkg="map_server" type="map_server" args="$(find nav_2d)/maps/$(arg map)" />
+
+  <node if="$(eval odom_provider == 'FIXED_ODOM')"
+    pkg="tf" type="static_transform_publisher" name="static_odom_broadcaster"
+    args="0 0 0 0 0 0 1 map odom 200" />  
+
+  <include if="$(eval odom_provider == 'AMCL')" file="$(find nav_2d)/launch/amcl.launch" />
+
+  <include file="$(find nav_2d)/launch/move_base.launch">
+    <arg name="local_planner" value="$(arg local_planner)"/>
+  </include>
+
+  <group if="$(arg open_rviz)">
+    <node pkg="rviz" type="rviz" name="rviz" required="true"
+      args="-d $(find nav_2d)/rviz/$(arg local_planner)_config.rviz"/>
+  </group>
+
+</launch>

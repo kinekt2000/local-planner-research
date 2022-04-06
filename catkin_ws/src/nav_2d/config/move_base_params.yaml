@@ -1,0 +1,41 @@
+recovery_behaviors: #[]
+  - name: conservative_reset
+    type: clear_costmap_recovery/ClearCostmapRecovery
+  - name: agressive_reset
+    type: clear_costmap_recovery/ClearCostmapRecovery
+
+# Recovery behaviors
+conservative_reset:
+  reset_distance: 1.0
+
+agressive_reset:
+  reset_distance: 0.5
+
+# sending to cmd_vel frequency
+controller_frequency: 10.
+
+# time to find valid plan before space-clearing
+planner_patience: 5.
+
+# time to reset space when cmd_vel not performed
+controller_patience: 15.
+
+# how often rebuild global plan
+planner_frequency: 0.  # 0. is only plan on a new goal or when local planner fails
+
+# whicn obstacles away shoud be cleared
+conservative_reset_dist: 1.0
+
+# is space-clearing enabled
+recovery_behavior_enabled: true
+
+# off maps clearing when robot not active
+shutdown_costmaps: false
+
+# how long robot oscillationg before map is cleared
+oscillation_timeout: 0.0  # 0. is infinite
+
+# distance that defines the boundaries of oscillation
+oscillation_distance: .3
+
+max_planning_retries: -1.  # -1 is infinite

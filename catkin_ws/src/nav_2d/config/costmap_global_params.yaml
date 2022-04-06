@@ -1,0 +1,21 @@
+plugins:
+  - {name: static_layer, type: "costmap_2d::StaticLayer"}
+
+global_costmap:
+  # frame and transform
+  global_frame: map
+
+  # rate
+  update_frequency: 1.0
+  publish_frequency: 1.0
+
+  # map management
+  rolling_window: false
+  width: 30.0
+  height: 30.0
+  origin_x: -15.0
+  origin_y: -15.0
+
+static_layer:
+  enabled: true
+  map_topic: /map
