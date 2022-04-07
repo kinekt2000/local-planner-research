@@ -9,7 +9,7 @@
         <!-- move base parameters -->
         <rosparam file="$(find nav_2d)/config/move_base_params.yaml" command="load"/>
         <rosparam file="$(find nav_2d)/config/global_planner_params.yaml" command="load"/>
-        <rosparam file="$(find nav_2d)/config/$(arg local_planner)_local_planner_params.yaml" command="load"/>
+        <rosparam file="$(find nav_2d)/config/local_planners/$(arg local_planner)_local_planner_params.yaml" command="load"/>
 
         
         <!-- global costmap -->

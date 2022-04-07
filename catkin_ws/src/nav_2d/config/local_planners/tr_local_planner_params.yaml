@@ -28,12 +28,12 @@ TrajectoryPlannerROS:
   angular_sim_granularity: 0.025
   vx_samples: 15
   vtheta_samples: 60
-  controller_frequency: 10.0
+  controller_frequency: 5.0
 
 # Trajectory Scoring Parameters
-  meter_scoring: false
-  pdist_scale: 0.6
-  gdist_scale: 0.8
+  meter_scoring: true
+  path_distance_bias: 0.6
+  goal_distance_bias: 0.8
   occdist_scale: 0.1
   heading_lookahead: 1.0
   heading_scoring: true
