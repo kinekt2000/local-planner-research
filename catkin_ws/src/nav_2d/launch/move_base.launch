@@ -4,7 +4,11 @@
     <arg name="cmd_vel_topic" default="robot/cmd_vel"/>
     <arg name="odom_topic" default="odom"/>
 
-    <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+    <arg name="dnone" default=""/>
+    <arg name="dgdb" default="gdb -ex run --args"/>
+
+
+    <node pkg="move_base"  type="move_base" launch-prefix="$(arg dnone)" respawn="false" name="move_base" output="screen">
 
         <!-- move base parameters -->
         <rosparam file="$(find nav_2d)/config/move_base_params.yaml" command="load"/>
