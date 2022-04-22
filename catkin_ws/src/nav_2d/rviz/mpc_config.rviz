@@ -258,7 +258,7 @@ Visualization Manager:
           Scale: 1
           Value: true
         Value: false
-      Enabled: false
+      Enabled: true
       Keep: 1
       Name: Odometry
       Position Tolerance: 0.10000000149011612
@@ -275,12 +275,20 @@ Visualization Manager:
         Value: Arrow
       Topic: /odom
       Unreliable: true
-      Value: false
+      Value: true
+    - Class: rviz/Marker
+      Enabled: true
+      Marker Topic: /move_base/MpcLocalPlannerROS/mpc_markers
+      Name: Marker
+      Namespaces:
+        PointObstacles: true
+      Queue Size: 100
+      Value: true
     - Alpha: 1
       Buffer Length: 1
       Class: rviz/Path
       Color: 25; 255; 0
-      Enabled: false
+      Enabled: true
       Head Diameter: 0.30000001192092896
       Head Length: 0.20000000298023224
       Length: 0.30000001192092896
@@ -299,14 +307,6 @@ Visualization Manager:
       Shaft Length: 0.10000000149011612
       Topic: /move_base/MpcLocalPlannerROS/local_plan
       Unreliable: false
-      Value: false
-    - Class: rviz/Marker
-      Enabled: true
-      Marker Topic: /move_base/MpcLocalPlannerROS/mpc_markers
-      Name: Marker
-      Namespaces:
-        {}
-      Queue Size: 100
       Value: true
   Enabled: true
   Global Options:
@@ -336,7 +336,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 5.063801288604736
+      Distance: 21.885387420654297
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
