@@ -2,6 +2,7 @@
   <arg name="map" default="map_empty.yaml" />
   <arg name="open_rviz" default="true" />
   
+  <!-- available dwa, mpc, teb, tr -->
   <arg name="local_planner" default="dwa" />
   <arg name="odom_provider" default="FIXED_ODOM"/>
 
