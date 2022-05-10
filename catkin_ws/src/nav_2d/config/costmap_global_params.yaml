@@ -1,7 +1,10 @@
-plugins:
-  - {name: static_layer, type: "costmap_2d::StaticLayer"}
-
 global_costmap:
+  plugins:
+    - {name: static_layer, type: "costmap_2d::StaticLayer"}
+    - {name: obstacle_layer, type: "costmap_2d::ObstacleLayer"}
+    - {name: inflation_layer, type: "costmap_2d::InflationLayer"}
+
+
   # frame and transform
   global_frame: map
 
@@ -16,6 +19,6 @@ global_costmap:
   origin_x: -15.0
   origin_y: -15.0
 
-static_layer:
-  enabled: true
-  map_topic: /map
+  static_layer:
+    enabled: true
+    map_topic: /map

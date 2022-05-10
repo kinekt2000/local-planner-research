@@ -18,8 +18,8 @@ TrajectoryPlannerROS:
 
 
 # Goal Tolerance Parametes
-  xy_goal_tolerance: 0.15
-  yaw_goal_tolerance: 0.17
+  xy_goal_tolerance: 0.20
+  yaw_goal_tolerance: 0.10
   latch_xy_goal_tolerance: false
 
 # Forward Simulation Parameters
@@ -28,24 +28,24 @@ TrajectoryPlannerROS:
   angular_sim_granularity: 0.025
   vx_samples: 15
   vtheta_samples: 60
-  controller_frequency: 5.0
+  controller_frequency: 20.0
 
 # Trajectory Scoring Parameters
   meter_scoring: true
-  path_distance_bias: 0.8
-  goal_distance_bias: 0.8
-  occdist_scale: 0.01
+  path_distance_bias: 1.6
+  goal_distance_bias: 5.2
+  occdist_scale: 0.05
   heading_lookahead: 0.325
   heading_scoring: false
   dwa: false
   global_frame_id: odom
 
 # Oscillation Prevention Parameters
-  oscillation_reset_dist: 0.3
+  oscillation_reset_dist: 0.05
 
 # Global Plan
   prune_plan: true
 
 # Debugging
-  publish_traj_pc : true
-  publish_cost_grid_pc: true
+  # publish_traj_pc : true
+  # publish_cost_grid_pc: true

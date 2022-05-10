@@ -8,9 +8,9 @@ MpcLocalPlannerROS:
   robot:
     type: "unicycle"
     unicycle:
-      max_vel_x: 1.0
-      max_vel_x_backwards: 0.2
-      max_vel_theta: 0.3
+      max_vel_x: 2.0
+      max_vel_x_backwards: 0.5
+      max_vel_theta: 1.0
       acc_lim_x: 0.5 # deactive bounds with zero
       dec_lim_x: 0.5 # deactive bounds with zero
       acc_lim_theta: 0.5 # deactivate bounds with zero
@@ -23,7 +23,7 @@ MpcLocalPlannerROS:
 
   ## Collision avoidance
   collision_avoidance:
-    min_obstacle_dist: 0.05 # Note, this parameter must be chosen w.r.t. the footprint_model
+    min_obstacle_dist: 0.7 # Note, this parameter must be chosen w.r.t. the footprint_model
     enable_dynamic_obstacles: true
     force_inclusion_dist: 1.0
     cutoff_dist: 3.5
@@ -74,8 +74,8 @@ MpcLocalPlannerROS:
   ## Controller options
   controller:
     outer_ocp_iterations: 5
-    xy_goal_tolerance: 0.15
-    yaw_goal_tolerance: 0.17
+    xy_goal_tolerance: 0.20
+    yaw_goal_tolerance: 0.10
     global_plan_overwrite_orientation: true
     global_plan_prune_distance: 1.0
     allow_init_with_backward_motion: false

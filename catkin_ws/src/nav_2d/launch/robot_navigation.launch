@@ -1,12 +1,13 @@
 <launch>
-  <arg name="map" default="map_empty.yaml" />
+  <arg name="map" default="empty" />
   <arg name="open_rviz" default="true" />
   
   <!-- available dwa, mpc, teb, tr -->
   <arg name="local_planner" default="dwa" />
   <arg name="odom_provider" default="FIXED_ODOM"/>
+  <arg name="auto_goal" default="false"/>
 
-  <node name="map_server" pkg="map_server" type="map_server" args="$(find nav_2d)/maps/$(arg map)" />
+  <node name="map_server" pkg="map_server" type="map_server" args="$(find nav_2d)/maps/$(arg map).yaml" />
 
   <node if="$(eval odom_provider == 'FIXED_ODOM')"
     pkg="tf" type="static_transform_publisher" name="static_odom_broadcaster"
@@ -21,6 +22,29 @@
   <group if="$(arg open_rviz)">
     <node pkg="rviz" type="rviz" name="rviz" required="true"
       args="-d $(find nav_2d)/rviz/$(arg local_planner)_config.rviz"/>
+  </group>
+
+  <group if="$(arg auto_goal)">
+    <node if="$(eval arg('map') == 'zig-zag')" pkg="goal_provider" type="goal_provider.py" name="goal_provider" output="screen">
+      <param name="x" value="-5"/>
+      <param name="y" value="4"/>
+      <param name="theta" value="3.14"/>
+      <param name="record" value="$(arg map)/$(arg local_planner)_bag"/>
+    </node>
+
+    <node if="$(eval arg('map') == 'corner')" pkg="goal_provider" type="goal_provider.py" name="goal_provider" output="screen">
+      <param name="x" value="7"/>
+      <param name="y" value="5"/>
+      <param name="theta" value="0"/>
+      <param name="record" value="$(arg map)/$(arg local_planner)_bag"/>
+    </node>
+
+    <node if="$(eval arg('map') == 'outdoor')" pkg="goal_provider" type="goal_provider.py" name="goal_provider" output="screen">
+      <param name="x" value="9"/>
+      <param name="y" value="9"/>
+      <param name="theta" value="0.79"/>
+      <param name="record" value="$(arg map)/$(arg local_planner)_bag"/>
+    </node>
   </group>
 
 </launch>

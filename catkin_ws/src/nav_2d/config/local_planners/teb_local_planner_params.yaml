@@ -18,8 +18,8 @@ TebLocalPlannerROS:
     radius: 0.35
 
 # Goal Tolerance Parametes
-  xy_goal_tolerance: 0.15
-  yaw_goal_tolerance: 0.17
+  xy_goal_tolerance: 0.20
+  yaw_goal_tolerance: 0.10
   free_goal_velocity: true
 
 # Trajectory Configuration Parameters
@@ -41,7 +41,7 @@ TebLocalPlannerROS:
   include_costmap_obstacles: false
   costmap_obstacles_behind_robot_dist: 2.0
   inflation_dist: 0.75
-  include_dynamic_obstacles: false
+  include_dynamic_obstacles: true
   legacy_obstacle_association: false
   obstacle_association_force_inclusion_factor: 1.5
   obstacle_association_cutoff_factor: 5
@@ -79,5 +79,5 @@ TebLocalPlannerROS:
   switching_blocking_period: 0.0
 
 # Debugging
-  publish_feedback: true
-  visualize_hc_graph: true
+  # publish_feedback: true
+  # visualize_hc_graph: true
