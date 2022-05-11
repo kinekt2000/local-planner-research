@@ -1,9 +1,8 @@
 #!/usr/bin/env python3
 
-from time import sleep
 import rospy
 import sys
-from os.path import abspath, dirname, exists
+from os.path import abspath, exists
 from os import makedirs
 import actionlib
 from move_base_msgs.msg import MoveBaseAction, MoveBaseGoal
@@ -31,22 +30,19 @@ def main():
         rospy.loginfo("Waiting for the move_base action server to come up")
 
     goal = MoveBaseGoal()
-
-
     goal.target_pose.header.frame_id = "map"
     goal.target_pose.header.stamp = rospy.Time.now()
-
     goal.target_pose.pose.position.x = x
     goal.target_pose.pose.position.y = y
     goal.target_pose.pose.position.z = 0
     goal.target_pose.pose.orientation = Quaternion(*quaternion_from_euler(0, 0, theta))
-
 
     rosbag_recorder.RosbagRecord("rosbag record /odom /move_base/GlobalPlanner/plan /robot/cmd_vel", rosbag_dir)
     
     rospy.loginfo("Sending goal")
     client.send_goal(goal)
     client.wait_for_result()
+    rospy.sleep(1)
 
     if client.get_state() == actionlib.GoalStatus.SUCCEEDED:
         rospy.loginfo("done!")

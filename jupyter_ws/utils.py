@@ -14,7 +14,7 @@ def bag_path(map, algorithm):
 
 def bag_list(path):
     for (_, _, files) in os.walk(path):
-        return list(map(lambda file: os.path.join(path, file), files))
+        return list(map(lambda file: os.path.join(path, file), sorted(files)))
 
 
 def parse_yaml(string):
@@ -35,6 +35,11 @@ def path_length(path):
 def path_deviation(path, distance):
     integral = integrate.simps(distance.dist, distance.t)
     return (integral, integral/path_length(path))
+
+
+def travel_time(cmd_vel):
+    non_zero = cmd_vel[~((cmd_vel["linear.x"].abs() < 1e-6) & (cmd_vel["angular.z"].abs() < 1e-6))]
+    return non_zero.iloc[-1].Time - non_zero.iloc[0].Time
 
 
 def simplify_odom(odoms: pd.DataFrame):
@@ -59,6 +64,12 @@ def simplify_odom(odoms: pd.DataFrame):
     specific["theta"] = specific[["qx", "qy", "qz", "qw"]].apply(lambda r: euler_from_quaternion(r.to_numpy())[-1], axis=1)
     specific.drop(columns=["qx", "qy", "qz", "qw"], inplace=True)
     return specific
+
+def simplify_cmd_vel(cmd_vel: pd.DataFrame):
+    return cmd_vel[~((cmd_vel["linear.x"].abs() < 1e-6) & (cmd_vel["angular.z"].abs() < 1e-6))]\
+        .rename(columns={"linear.x": "linear", "angular.z": "angular", "Time": "t"})\
+        [["t", "linear", "angular"]]
+        
 
 
 def odom_to_vel(simple_odom: pd.DataFrame):

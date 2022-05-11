@@ -3,10 +3,12 @@
 <launch>
     <arg name="bot" default="simple_robot" />
     <arg name="map" default="empty"/>
+    <arg name="gui" default="true"/>
 
     <!-- Run gazebo empty world -->
     <include file="$(find gazebo_ros)/launch/empty_world.launch">
         <arg if="$(eval map != 'empty')" name="world_name" value="$(find robot_gazebo)/worlds/$(arg map).world"/>
+        <arg name="gui" value="$(arg gui)"/>
     </include>
 
     <!-- Spawn robot -->
