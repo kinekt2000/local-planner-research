@@ -2,4 +2,3 @@ build
 devel
 .catkin_workspace
 rosbag
-dumped_data
