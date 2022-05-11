@@ -27,6 +27,7 @@ def main():
     client = actionlib.SimpleActionClient('move_base', MoveBaseAction)
 
     while(not client.wait_for_server(rospy.Duration(5.0))):
+        rospy.sleep(1)
         rospy.loginfo("Waiting for the move_base action server to come up")
 
     goal = MoveBaseGoal()

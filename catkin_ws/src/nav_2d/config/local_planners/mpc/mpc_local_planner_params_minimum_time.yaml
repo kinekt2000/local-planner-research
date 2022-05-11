@@ -22,9 +22,9 @@ MpcLocalPlannerROS:
   ## Collision avoidance
   collision_avoidance:
     min_obstacle_dist: 0.05 # Note, this parameter must be chosen w.r.t. the footprint_model
-    enable_dynamic_obstacles: False
+    enable_dynamic_obstacles: True
     force_inclusion_dist: 0.5
-    cutoff_dist: 2.5 
+    cutoff_dist: 2.5
     include_costmap_obstacles: True
     costmap_obstacles_behind_robot_dist: 1.5
 
@@ -89,10 +89,10 @@ MpcLocalPlannerROS:
   solver:
     type: "ipopt"
     ipopt:
-      iterations: 100
+      iterations: 90
       max_cpu_time: -1.0
       ipopt_numeric_options:
-        tol: 1e-4
+        tol: 1e-3
       ipopt_string_options:
         linear_solver: "mumps" 
         hessian_approximation: "exact" # exact or limited-memory
