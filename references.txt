@@ -1,0 +1,54 @@
+Karur, K.; Sharma, N.; Dharmatti, C.; Siegel, J. A Survey of Path Planning Algorithms for Mobile Robots. Vehicles 2021, 3, 448–468. https://doi.org/10.3390/ vehicles3030027
+
+Stachniss, C. (2009). Robotic Mapping and Exploration. 10.1007/978-3-642-01097-2.
+
+T. Lozano-P ́erez, and M. A. Wesley. “An algorithm for planning collision-free paths among polyhedral obstacles,” Commun. ACM, vol. 22, no. 10, pp. 560–570, Oct. 1979.
+
+Magdi S. Mahmoud, Mojeed O. Oyedeji, Yuanqing Xia, Chapter 9 - Path planning in autonomous ground vehicles, 2021, Pages 297-329,https://doi.org/10.1016/B978-0-12-821186-1.00017-9.
+
+Jean-Claude Latombe.Robot Motion Planning. Kluwer Academic Publishers, 1991 - 672.
+
+Zhou, C., Huang, B. & Fränti, P. A review of motion planning algorithms for intelligent robots. J Intell Manuf 33, 387–424 (2022). https://doi.org/10.1007/s10845-021-01867-z
+
+Dijkstra, E. W. (1959). A note on two problems in connexion with graphs. Numerische Mathematik, 1, 269–271.
+
+Hart, P. E., Nilsson, N. J., & Raphael, B. (1968). A formal basis for the heuristic determination of minimum cost paths. IEEE Transactions on Systems Science and Cybernetics, 4(2), 100–107
+
+LaValle, S. M., & Kuffner, J. J. (1999). Randomized kinodynamic planning. The International Journal of Robotics Research, 20(5), 378–400.
+
+Bautista, G. D., Perez, J., Milanés, V., & Nashashibi, F. (2015). A review of motion planning techniques for automated vehicles. IEEE Transactions on Intelligent Transportation Systems, 17(4), 1–11.
+
+Kavraki, L. E., Svestka, P., Latombe, J. C., & Overmars, M. H. (2002). Probabilistic roadmaps for path planning in high-dimensional configuration spaces. IEEE Transactions on Robotics and Automation, 12(4), 566–580.
+
+Dubins, L.E. (July 1957). "On Curves of Minimal Length with a Constraint on Average Curvature, and with Prescribed Initial and Terminal Positions and Tangents". American Journal of Mathematics. 79 (3): 497–516.
+
+Murphy, R. R. (2000). Introduction to AI robotics. MIT press. Oh, J., Guo, Y., Singh, S. & Lee, H. (2018). Self-imitation learning. arXiv 2018, arXiv:1806.05635v1 [cs.LG].
+
+Khatib, O. Real-time obstacle avoidance for manipulators and mobile robots. In Autonomous Robot Vehicles; Springer: Berlin/Heidelberg, Germany, 1986; pp. 396–404.
+
+D. Fox, W. Burgard, and S. Thrun, “The dynamic window approach to collision avoidance,” IEEE Robotics and Automation Magazine, vol. 4, no. 1, pp. 23–33, 1997.
+
+C. Rösmann, W. Feiten, T. Wösch, F. Hoffmann and T. Bertram: Trajectory modification considering dynamic constraints of autonomous robots. Proc. 7th German Conference on Robotics, Germany, Munich, 2012, pp 74–79.
+
+Gerkey, Brian & Konolige, Kurt. (2008). Planning and control in unstructured terrain. 
+
+Quinlan, S.; Khatib, O. Elastic Bands: Connecting Path Planning and Control, IEEE Int. Conf. on Robotics and Automation (ICRA) (2), 1993
+
+Rösmann, C., Makarow, A., and Bertram, T., “Online Motion Planning based on Nonlinear Model Predictive Control with Non-Euclidean Rotation Groups”, arXiv e-prints, 2020.
+
+Cutler, C. R. and Ramaker, B. L. (1979). Dynamic matrix control—A computer control algorithm. Proceedings of the Joint Automatic Control Conference, June 1980, San Francisco, CA.
+
+Gregory Dudek. Computational Principles of Mobile Robotics. Cambridge University Press, 2010 - 391.
+
+ROS/Concepts - ROS Wiki [Электронный ресурс]. URL:http://wiki.ros.org/ROS/Concepts
+
+rviz - ROS Wiki [Электронный ресурс]. URL: http://wiki.ros.org/rviz
+
+Koenig, N.P., & Howard, A. (2004). Design and use paradigms for Gazebo, an open-source multi-robot simulator. 2004 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS) (IEEE Cat. No.04CH37566), 3, 2149-2154 vol.3.
+
+navigation/Tutorials/RobotSetup - ROS Wiki [Электронный ресурс]. URL: http://wiki.ros.org/navigation/Tutorials/RobotSetup
+
+
+
+
+
