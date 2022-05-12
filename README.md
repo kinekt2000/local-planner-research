@@ -75,7 +75,7 @@ local_planner_research/catkin_make $ source devel/setup.sh
 # availble arguments (can be undefined): map, local_planner, autogoal
 # map           -- map which used to build global plan. Available <zig-zag, corner, outdoor>
 # local_planner -- approach to build motion trajectory. Available <dwa, tr, teb, mpc>
-# auto_goal     -- floag for automatically set goal pose and start recording. Available <false, true>
+# auto_goal     -- flag for automatically set goal pose and start recording. Available <false, true>
 
 local_planner_research/catkin_make $ roslaunch nav_2d robot_navigation
 ```
