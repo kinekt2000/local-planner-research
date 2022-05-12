@@ -1,4 +1,6 @@
+*~lock*odt*
 build
 devel
 .catkin_workspace
 rosbag
+
