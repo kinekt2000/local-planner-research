@@ -67,6 +67,7 @@ Be carefully, algorithm is absolutely stupid.
 ## Run local-planners
 
 ```shell
+# after simulation run
 :local_planner_research $ cd catkin_ws
 :local_planner_research/catkin_make $ catkin_make
 
