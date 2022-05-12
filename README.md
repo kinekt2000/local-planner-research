@@ -66,7 +66,7 @@ Be carefully, algorithm is absolutely stupid.
 
 ## Run local-planners
 
-```console
+```shell
 local_planner_research $ cd catkin_ws
 local_planner_research/catkin_make $ catkin_make
 
