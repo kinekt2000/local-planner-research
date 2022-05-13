@@ -42,7 +42,7 @@
         </include>
     </group>
 
-    <group if="$(eval arg('map') == 'empty')">
+    <group if="$(eval map not in ['zig-zag', 'corner', 'outdoor'])">
         <include file="$(find robot_gazebo)/launch/robot_spawn.launch">
             <arg name="bot" value="$(arg bot)"/>
         </include>
