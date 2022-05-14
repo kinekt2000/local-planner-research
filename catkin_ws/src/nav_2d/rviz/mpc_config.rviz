@@ -226,12 +226,12 @@ Visualization Manager:
       Class: rviz/Map
       Color Scheme: costmap
       Draw Behind: false
-      Enabled: true
+      Enabled: false
       Name: Global
       Topic: /move_base/global_costmap/costmap
       Unreliable: false
       Use Timestamp: false
-      Value: true
+      Value: false
     - Alpha: 0.699999988079071
       Class: rviz/Map
       Color Scheme: costmap
@@ -277,14 +277,6 @@ Visualization Manager:
       Topic: /odom
       Unreliable: true
       Value: true
-    - Class: rviz/Marker
-      Enabled: true
-      Marker Topic: /move_base/MpcLocalPlannerROS/mpc_markers
-      Name: Marker
-      Namespaces:
-        {}
-      Queue Size: 100
-      Value: true
     - Alpha: 1
       Buffer Length: 1
       Class: rviz/Path
@@ -308,6 +300,14 @@ Visualization Manager:
       Shaft Length: 0.10000000149011612
       Topic: /move_base/MpcLocalPlannerROS/local_plan
       Unreliable: false
+      Value: true
+    - Class: rviz/Marker
+      Enabled: true
+      Marker Topic: /move_base/MpcLocalPlannerROS/mpc_markers
+      Name: Marker
+      Namespaces:
+        {}
+      Queue Size: 100
       Value: true
   Enabled: true
   Global Options:
@@ -337,7 +337,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 34.60368728637695
+      Distance: 29.60092544555664
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1

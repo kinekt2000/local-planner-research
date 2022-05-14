@@ -20,30 +20,30 @@ MpcLocalPlannerROS:
 
   ## Collision avoidance
   collision_avoidance:
-    min_obstacle_dist: 0.4 # Note, this parameter must be chosen w.r.t. the footprint_model
+    min_obstacle_dist: 0.35 # Note, this parameter must be chosen w.r.t. the footprint_model
     enable_dynamic_obstacles: True
     force_inclusion_dist: 0.5
     cutoff_dist: 2.0
     include_costmap_obstacles: True
-    costmap_obstacles_behind_robot_dist: 2.5
+    costmap_obstacles_behind_robot_dist: 1.5
 
   ## Planning grid 
   grid:
     type: "fd_grid"
-    grid_size_ref: 20
-    dt_ref: 0.3
+    grid_size_ref: 30
+    dt_ref: 0.1
     xf_fixed: [True, True, True]
     warm_start: True
-    collocation_method: "forward_differences"
-    cost_integration_method: "left_sum"
+    collocation_method: "crank_nicolson_differences"
+    cost_integration_method: "trapezoidal_rule"
     variable_grid:
       enable: True  
       min_dt: 0.0;
-      max_dt: 10.0;
+      max_dt: 2.0;
       grid_adaptation:
         enable: True
         dt_hyst_ratio: 0.1
-        min_grid_size: 2
+        min_grid_size: 5
         max_grid_size: 50
 
   ## Planning options
@@ -51,11 +51,11 @@ MpcLocalPlannerROS:
     objective:
       type: "minimum_time" # minimum_time requires grid/variable_grid/enable=True and grid/xf_fixed set properly
       quadratic_form:
-        state_weights: [2.0, 2.0, 2.0]
+        state_weights: [1.0, 1.0, 1.0]
         control_weights: [1.0, 1.0]
         integral_form: False
       minimum_time_via_points:
-        position_weight: 10.5
+        position_weight: 0.5
         orientation_weight: 0.0
         via_points_ordered: False
     terminal_cost:

@@ -1,6 +1,7 @@
+.vscode
+__pycache__
 *~lock*odt*
 build
 devel
 .catkin_workspace
 rosbag
-

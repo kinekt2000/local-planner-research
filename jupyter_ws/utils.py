@@ -1,3 +1,5 @@
+from dataclasses import dataclass
+import json
 import os
 import yaml
 import pandas as pd
@@ -69,7 +71,18 @@ def simplify_cmd_vel(cmd_vel: pd.DataFrame):
     return cmd_vel[~((cmd_vel["linear.x"].abs() < 1e-6) & (cmd_vel["angular.z"].abs() < 1e-6))]\
         .rename(columns={"linear.x": "linear", "angular.z": "angular", "Time": "t"})\
         [["t", "linear", "angular"]]
-        
+
+def evaluate_smoothness(data: pd.DataFrame, x_name, y_name, z_name=None):
+
+    norm_x = (data[x_name] - data[x_name].min())/(data[x_name].max() - data[x_name].min())
+    norm_y = (data[y_name] - data[y_name].min())/(data[y_name].max() - data[y_name].min())
+
+    if z_name is not None:
+        norm_z = (data[z_name] - data[z_name].min())/(data[z_name].max() - data[z_name].min())
+        shrinked = np.sqrt(np.square(norm_y.diff()) + np.square(norm_z.diff())) 
+        return (shrinked / norm_x.diff()).std()
+
+    return (norm_y.diff() / norm_x.diff()).std()
 
 
 def odom_to_vel(simple_odom: pd.DataFrame):
@@ -86,7 +99,7 @@ def odom_to_vel(simple_odom: pd.DataFrame):
     diff.t /=2
 
     diff.t += simple_odom[:-1].t
-    diff.drop(columns=["x", "y", "theta"])
+    diff.drop(columns=["x", "y", "theta"], inplace=True)
 
     return diff
 
@@ -103,3 +116,37 @@ def local_to_global_distance(local_path: pd.DataFrame, global_path: pd.DataFrame
         distance_list += [{"t": local_point.t, "dist": distance}]
 
     return pd.DataFrame(distance_list)
+
+def load_data(dir, map, approach):
+    @dataclass
+    class Deviation:
+        absolute: float
+        relative: float
+
+    @dataclass
+    class DataObject:
+        map_name: str
+        approach_name: str
+        global_path: pd.DataFrame
+        local_path: pd.DataFrame
+        velocity: pd.DataFrame
+        odom_velocity: pd.DataFrame
+        global_path_deviation: pd.DataFrame
+        measured_deviation: Deviation
+        travel_time: float
+        freq: float
+
+    with open(os.path.join(dir, map, f"{approach}.json"), "r") as f:
+        data = json.load(f)
+        return DataObject(
+            map_name=map,
+            approach_name=approach,
+            global_path=pd.DataFrame(data["global_path"]),
+            local_path=pd.DataFrame(data["local_path"]),
+            velocity=pd.DataFrame(data["velocity"]),
+            odom_velocity=pd.DataFrame(data["odom_velocity"]),
+            global_path_deviation=pd.DataFrame(data["global_path_deviation"]),
+            measured_deviation=Deviation(**data["measured_deviation"]),
+            travel_time=data["travel_time"],
+            freq=data["freq"]
+        )
