@@ -72,17 +72,29 @@ def simplify_cmd_vel(cmd_vel: pd.DataFrame):
         .rename(columns={"linear.x": "linear", "angular.z": "angular", "Time": "t"})\
         [["t", "linear", "angular"]]
 
-def evaluate_smoothness(data: pd.DataFrame, x_name, y_name, z_name=None):
+def evaluate_smoothness(data: pd.DataFrame, x_name, y_name, z_name=None, angle_fix=False):
 
     norm_x = (data[x_name] - data[x_name].min())/(data[x_name].max() - data[x_name].min())
     norm_y = (data[y_name] - data[y_name].min())/(data[y_name].max() - data[y_name].min())
 
+    diff_y = norm_y.diff().replace({0: 1e-10})
+    if (angle_fix):
+        for i, ang in enumerate(diff_y):
+            if np.abs(ang) >= np.pi*2:
+                diff_y[i] = (diff_y[i-1] + diff_y[i+1])/2
+
     if z_name is not None:
         norm_z = (data[z_name] - data[z_name].min())/(data[z_name].max() - data[z_name].min())
-        shrinked = np.sqrt(np.square(norm_y.diff()) + np.square(norm_z.diff())) 
-        return (shrinked / norm_x.diff()).std()
+        shrinked = np.sqrt(np.square(diff_y) + np.square(norm_z.diff()))
+        der = shrinked / norm_x.diff()
+    else:
+        der = diff_y / norm_x.diff()
+    
+    for i, vel in der.items():
+            if np.abs(vel) >= 1e+3:
+                der.drop(i, inplace=True)
 
-    return (norm_y.diff() / norm_x.diff()).std()
+    return der[~der.isin([np.inf, -np.inf])].std()
 
 
 def odom_to_vel(simple_odom: pd.DataFrame):

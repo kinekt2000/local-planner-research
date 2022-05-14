@@ -26,16 +26,16 @@ TrajectoryPlannerROS:
   sim_time: 4.0
   sim_granularity: 0.025
   angular_sim_granularity: 0.025
-  vx_samples: 15
+  vx_samples: 20
   vtheta_samples: 60
-  controller_frequency: 20.0
+  controller_frequency: 8.0
 
 # Trajectory Scoring Parameters
   meter_scoring: true
-  path_distance_bias: 1.6
-  goal_distance_bias: 5.2
-  occdist_scale: 0.05
-  heading_lookahead: 0.325
+  path_distance_bias: 2.0
+  goal_distance_bias: 1.6
+  occdist_scale: 0.035
+  heading_lookahead: 0.5
   heading_scoring: false
   dwa: false
   global_frame_id: odom

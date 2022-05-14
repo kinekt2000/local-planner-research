@@ -5,7 +5,7 @@ plugins:
 
 # frame and transform
 robot_radius: 0.35
-footprint_padding: 0.0
+footprint_padding: 0.05
 transform_tolerance: 0.1
 
 # rate
@@ -35,5 +35,5 @@ obstacle_layer:
     max_obstacle_height: 0.25
 
 inflation_layer:
-  cost_scaling_factor: 20.0  # Exponential rate at which the obstacle cost drops off (default: 10). Must be chosen so that the cost value is > 0 at robot's circumscribed radius.
-  inflation_radius:    1.5 # Max. distance from an obstacle at which costs are incurred for planning paths. Must be > robot's circumscribed radius.
+  cost_scaling_factor: 10.0  # Exponential rate at which the obstacle cost drops off (default: 10). Must be chosen so that the cost value is > 0 at robot's circumscribed radius.
+  inflation_radius:    0.5 # Max. distance from an obstacle at which costs are incurred for planning paths. Must be > robot's circumscribed radius.

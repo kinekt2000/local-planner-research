@@ -37,12 +37,12 @@
         <rosparam file="$(find nav_2d)/config/local_planners/mpc/mpc_local_planner_params_minimum_time.yaml" command="load" />
 
         <param name="base_global_planner" value="global_planner/GlobalPlanner" />
-        <param name="planner_frequency" value="2.0" />
+        <param name="planner_frequency" value="0.0" />
         <param name="planner_patience" value="5.0" />
 
         <param name="base_local_planner" value="mpc_local_planner/MpcLocalPlannerROS" />
-        <param name="controller_frequency" value="4.0" />
-        <param name="controller_patience" value="5.0" />
+        <param name="controller_frequency" value="9.0" />
+        <param name="controller_patience" value="10.0" />
         
         <!-- remap -->
         <remap from="cmd_vel" to="$(arg cmd_vel_topic)"/>
