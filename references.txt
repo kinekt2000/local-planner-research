@@ -1,14 +1,14 @@
-Karur, K.; Sharma, N.; Dharmatti, C.; Siegel, J. A Survey of Path Planning Algorithms for Mobile Robots. Vehicles 2021, 3, 448–468. https://doi.org/10.3390/ vehicles3030027
+Karur K. et al. A Survey of Path Planning Algorithms for Mobile Robots //Vehicles. – 2021. – Т. 3. – №. 3. – С. 448-468.
 
-Stachniss, C. (2009). Robotic Mapping and Exploration. 10.1007/978-3-642-01097-2.
+Stachniss C. Robotic mapping and exploration. – Springer, 2009. – Т. 55.
 
-T. Lozano-P ́erez, and M. A. Wesley. “An algorithm for planning collision-free paths among polyhedral obstacles,” Commun. ACM, vol. 22, no. 10, pp. 560–570, Oct. 1979.
+Lozano-Pérez T., Wesley M. A. An algorithm for planning collision-free paths among polyhedral obstacles //Communications of the ACM. – 1979. – Т. 22. – №. 10. – С. 560-570.
 
-Magdi S. Mahmoud, Mojeed O. Oyedeji, Yuanqing Xia, Chapter 9 - Path planning in autonomous ground vehicles, 2021, Pages 297-329,https://doi.org/10.1016/B978-0-12-821186-1.00017-9.
+Alajlan M. et al. Global path planning for mobile robots in large-scale grid environments using genetic algorithms //2013 International Conference on Individual and Collective Behaviors in Robotics (ICBR). – IEEE, 2013. – С. 1-8.
 
-Jean-Claude Latombe.Robot Motion Planning. Kluwer Academic Publishers, 1991 - 672.
+Paden B. et al. A survey of motion planning and control techniques for self-driving urban vehicles //IEEE Transactions on intelligent vehicles. – 2016. – Т. 1. – №. 1. – С. 33-55.
 
-Zhou, C., Huang, B. & Fränti, P. A review of motion planning algorithms for intelligent robots. J Intell Manuf 33, 387–424 (2022). https://doi.org/10.1007/s10845-021-01867-z
+Zhou C., Huang B., Fränti P. A review of motion planning algorithms for intelligent robots //Journal of Intelligent Manufacturing. – 2021. – С. 1-38.
 
 Dijkstra, E. W. (1959). A note on two problems in connexion with graphs. Numerische Mathematik, 1, 269–271.
 
