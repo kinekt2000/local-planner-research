@@ -48,7 +48,7 @@ Koenig, N.P., & Howard, A. (2004). Design and use paradigms for Gazebo, an open-
 
 navigation/Tutorials/RobotSetup - ROS Wiki [Электронный ресурс]. URL: http://wiki.ros.org/navigation/Tutorials/RobotSetup
 
-
+ГОСТ Р ИСО 9241-110-2016 Эргономика взаимодействия человек-система. Часть 110. Принципы организации диалога. М.: Стандартинформ, 2016.
 
 
 
