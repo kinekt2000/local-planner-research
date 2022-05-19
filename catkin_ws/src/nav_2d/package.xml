@@ -58,7 +58,7 @@
   <depend>map_server</depend>
   <depend>global_planner</depend>
   <!-- <build_depend>move_base</build_depend> -->
-  <build_export_depend>move_base</build_export_depend>
+  <!-- <build_export_depend>move_base</build_export_depend> -->
   <!-- <exec_depend>move_base</exec_depend> -->
 
 

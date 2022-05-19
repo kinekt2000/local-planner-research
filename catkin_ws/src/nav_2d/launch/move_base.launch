@@ -8,7 +8,7 @@
     <arg name="dgdb" default="gdb -ex run --args"/>
 
 
-    <node pkg="move_base"  type="move_base" launch-prefix="$(arg dnone)" respawn="false" name="move_base" output="screen">
+    <node if="$(eval local_planner != 'mpc')" pkg="move_base"  type="move_base" launch-prefix="$(arg dnone)" respawn="false" name="move_base" output="screen">
 
         <!-- move base parameters -->
         <rosparam file="$(find nav_2d)/config/move_base_params.yaml" command="load"/>
@@ -23,6 +23,27 @@
         <rosparam file="$(find nav_2d)/config/costmap_common_params.yaml" command="load" ns="local_costmap"/>
         <rosparam file="$(find nav_2d)/config/costmap_local_params.yaml" command="load"/>
 
+        <!-- remap -->
+        <remap from="cmd_vel" to="$(arg cmd_vel_topic)"/>
+        <remap from="odom" to="$(arg odom_topic)"/>
+    </node>
+
+    <node if="$(eval local_planner == 'mpc')" pkg="move_base"  type="move_base" launch-prefix="$(arg dnone)" respawn="false" name="move_base" output="screen">
+
+        <rosparam file="$(find nav_2d)/config/local_planners/mpc/costmap_common_params.yaml" command="load" ns="global_costmap" />
+        <rosparam file="$(find nav_2d)/config/local_planners/mpc/costmap_common_params.yaml" command="load" ns="local_costmap" />
+        <rosparam file="$(find nav_2d)/config/local_planners/mpc/local_costmap_params.yaml" command="load" />
+        <rosparam file="$(find nav_2d)/config/local_planners/mpc/global_costmap_params.yaml" command="load" />
+        <rosparam file="$(find nav_2d)/config/local_planners/mpc/mpc_local_planner_params_minimum_time.yaml" command="load" />
+
+        <param name="base_global_planner" value="global_planner/GlobalPlanner" />
+        <param name="planner_frequency" value="0.0" />
+        <param name="planner_patience" value="5.0" />
+
+        <param name="base_local_planner" value="mpc_local_planner/MpcLocalPlannerROS" />
+        <param name="controller_frequency" value="9.0" />
+        <param name="controller_patience" value="10.0" />
+        
         <!-- remap -->
         <remap from="cmd_vel" to="$(arg cmd_vel_topic)"/>
         <remap from="odom" to="$(arg odom_topic)"/>

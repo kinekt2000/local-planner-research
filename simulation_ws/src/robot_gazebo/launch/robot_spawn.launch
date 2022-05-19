@@ -6,10 +6,11 @@
     <arg name="x" default="0"/>
     <arg name="y" default="0"/>
     <arg name="z" default="0.5"/>
+    <arg name="theta" default="0.0"/>
 
     <param name="robot/robot_description" command="$(find xacro)/xacro '$(find robot_description)/urdf/$(arg bot).xacro'"/>
     
     <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" output="screen"
-          args="-urdf -param /robot/robot_description -model robot -x $(arg x) -y $(arg y) -z $(arg z)" />
+          args="-urdf -param /robot/robot_description -model robot -x $(arg x) -y $(arg y) -z $(arg z) -Y$(arg theta)" />
 
 </launch>

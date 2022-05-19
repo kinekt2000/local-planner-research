@@ -3,16 +3,50 @@
 <launch>
     <arg name="bot" default="simple_robot" />
     <arg name="map" default="empty"/>
+    <arg name="gui" default="true"/>
 
     <!-- Run gazebo empty world -->
     <include file="$(find gazebo_ros)/launch/empty_world.launch">
         <arg if="$(eval map != 'empty')" name="world_name" value="$(find robot_gazebo)/worlds/$(arg map).world"/>
+        <arg name="gui" value="$(arg gui)"/>
     </include>
 
     <!-- Spawn robot -->
-    <include file="$(find robot_gazebo)/launch/robot_spawn.launch">
-        <arg name="bot" value="$(arg bot)"/>
-    </include>
+    <group if="$(eval arg('map') == 'zig-zag')">
+        <include file="$(find robot_gazebo)/launch/robot_spawn.launch">
+            <arg name="bot" value="$(arg bot)"/>
+            <arg name="x" value="4"/>
+            <arg name="y" value="-5"/>
+            <arg name="z" value="0.5"/>
+            <arg name="theta" value="3.14"/>
+        </include>
+    </group>
+
+    <group if="$(eval arg('map') == 'corner')">
+        <include file="$(find robot_gazebo)/launch/robot_spawn.launch">
+            <arg name="bot" value="$(arg bot)"/>
+            <arg name="x" value="-4"/>
+            <arg name="y" value="-7"/>
+            <arg name="z" value="0.5"/>
+            <arg name="theta" value="1.57"/>
+        </include>
+    </group>
+
+    <group if="$(eval arg('map') == 'outdoor')">
+        <include file="$(find robot_gazebo)/launch/robot_spawn.launch">
+            <arg name="bot" value="$(arg bot)"/>
+            <arg name="x" value="-9"/>
+            <arg name="y" value="-9"/>
+            <arg name="z" value="0.5"/>
+            <arg name="theta" value="0.79"/>
+        </include>
+    </group>
+
+    <group if="$(eval map not in ['zig-zag', 'corner', 'outdoor'])">
+        <include file="$(find robot_gazebo)/launch/robot_spawn.launch">
+            <arg name="bot" value="$(arg bot)"/>
+        </include>
+    </group>
 
     <!-- attach controller -->
     <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" ns="robot" respawn="false" output="screen">
