@@ -3,5 +3,6 @@ __pycache__
 *~lock*odt*
 build
 devel
+retranslator
 .catkin_workspace
 rosbag
